@@ -31,6 +31,146 @@
 
 First yo need reference the **ngGridView** script file in your page with AngularJS and jQuery.
 
+##ngGridView attributes
+<ul>
+    <li>gv-rows</li>
+    <li>gv-controller</li>
+</ul>
+
+###gv-rows
+This is the attribute used for pass the json object you want to bound to the **ngGridView**
+
+####Example
+
+```javascript
+var app = angular.module('gvTest');
+
+var counter = 5;
+
+var contacts = [
+    
+    {'id' : 0, 'name' : 'Adelle Laurie Adkings', 'phone' : '+1-747-544-5985'},
+    {id : 1, name : 'Salvatore Bono', phone : '+1-747-544-5985'},
+    {id : 2, name : 'Allen Brunk', phone : null},
+    {id : 3, name : 'Tyrone Donmoyer', phone : '+1-747-544-5985'},
+    {id : 4, name : 'Erica Wright', phone : '+1-747-544-5985'}
+];
+
+
+app.controller('gvTestController', ['$scope', function($scope){
+    
+    $scope.contacts = contacts;
+
+}]);
+```
+
+```html
+
+<!doctype html/>
+<html ng-app='gvTest'>
+    <head>
+        <link href="assets/css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="assets/css/font-awesome.min.css" rel="stylesheet"/>
+        <link href="assets/css/main.css" rel="stylesheet"/>
+    </head>
+    <body ng-controller='gvTestController'>
+     
+        <div class="container" style="margin-top:10px">
+            <div class="row">
+                <grid-view gv-rows='contacts'>
+                    <columns>
+                        <column header-text='#' data-field='id'></column>
+                        <column header-text='Name' data-field='name'></column>
+                        <column header-text='Phone Number' data-field='phone' null-text='no phone                                         number'></column>
+                    </columns>
+                </grid-view>
+            </div>
+        
+        </div>
+  
+        <script src="assets/js/jquery-1.10.2.min.js"></script>
+        <script src="assets/js/angular.min.js"></script>
+        <script src="assets/js/ng-grid-view.min.js"></script>
+        <script src="assets/js/app.js"></script>
+        <script src="assets/js/gvTestController.js"></script>
+    </body>
+</html>
+
+```
+
+###gv-controller
+Because **ngGridView** used an isoleted _scope_ if inside of it you want to use a method or any other object you needs to pass a controller, the name of this controller needs to be passed in the _gv-controller_ attribute
+
+####Example
+
+```javascript
+var app = angular.module('gvTest');
+
+var counter = 5;
+
+var contacts = [
+    
+    {'id' : 0, 'name' : 'Adelle Laurie Adkings', 'phone' : '+1-747-544-5985'},
+    {id : 1, name : 'Salvatore Bono', phone : '+1-747-544-5985'},
+    {id : 2, name : 'Allen Brunk', phone : null},
+    {id : 3, name : 'Tyrone Donmoyer', phone : '+1-747-544-5985'},
+    {id : 4, name : 'Erica Wright', phone : '+1-747-544-5985'}
+];
+
+
+app.controller('gvTestController', ['$scope', function($scope){
+    
+    $scope.contacts = contacts;
+    
+
+}]);
+
+app.controller('gridViewController', ['$scope', function($scope){
+    $scope.showSomeAwesome = function(){
+        console.log('this is the awesome thing.....');
+    };
+}]);
+
+```
+
+```html
+
+<!doctype html/>
+<html ng-app='gvTest'>
+    <head>
+        <link href="assets/css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="assets/css/font-awesome.min.css" rel="stylesheet"/>
+        <link href="assets/css/main.css" rel="stylesheet"/>
+    </head>
+    <body ng-controller='gvTestController'>
+     
+        <div class="container" style="margin-top:10px">
+            <div class="row">
+                <grid-view gv-rows='contacts' gv-controller='gridViewController'>
+                    <columns>
+                        
+                        <column header-text='Name' data-field='name'></column>
+                        <column header-text='Phone Number' data-field='phone' null-text='no phonenumber'></column>
+                        <templateColumn>
+                            <a ng-click='showSomeAwesome()'>Show something awesome</a>
+                        </templateColumn
+                    </columns>
+                </grid-view>
+            </div>
+        
+        </div>
+  
+        <script src="assets/js/jquery-1.10.2.min.js"></script>
+        <script src="assets/js/angular.min.js"></script>
+        <script src="assets/js/ng-grid-view.min.js"></script>
+        <script src="assets/js/app.js"></script>
+        <script src="assets/js/gvTestController.js"></script>
+    </body>
+</html>
+
+```
+
+
 ##ngGridView elements
 
 In order to **ngGridView** works you need specify what columns you want to show, inside the ```<grid-view>....</grid-view>``` using the ```<columns></columns>``` element.
