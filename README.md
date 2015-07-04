@@ -272,7 +272,7 @@ you can use _dataBound_ inside supported attributes too, lets see the following 
       </templateColumn>
   </columns>
 </grid-view>
-```
+```
 
 will produce the following code
 
@@ -301,4 +301,20 @@ will produce the following code
 ```
 
 you can see a full working example in the [**demo**](https://github.com/smancebo/nggridview/tree/master/demo) folder in this repository
+
+
+#planned features
+This are the features still in development
+<ul>
+    <li>Pagging</li>
+    <li>Sorting</li>
+    <li>Columns reOrder</li>
+    <li>Show/Hide Columns</li>
+</ul>
+
+<p>if you want to request a feature please let me know</p>
+<p>please report any issue</p>
+
+
+
 
